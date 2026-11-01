@@ -1,21 +1,11 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { prettyJSON } from "hono/pretty-json";
+import { bearerAuth } from "hono/bearer-auth";
+import users from "./modules/users/users.routes.js";
 
-const app = new Hono();
-app.use("*", prettyJSON());
+const app = new Hono().basePath("api").route("/user", users);
 
-const api = new Hono().basePath("/api");
-
-api.get("/:id", (c) => {
-	const id = c.req.param("id");
-
-	return c.json({
-		id: id,
-	});
-});
-
-app.route("/", api);
+// app.use("/test/*", bearerAuth({ token: "1234" }));
 
 serve(
 	{
