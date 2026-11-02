@@ -2,10 +2,15 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { bearerAuth } from "hono/bearer-auth";
 import users from "./modules/users/users.routes.js";
+import publications from "./modules/publications/publications.routes.js";
 
-const app = new Hono().basePath("api").route("/user", users);
+import { serveStatic } from "@hono/node-server/serve-static"; // убрать потом
 
-// app.use("/test/*", bearerAuth({ token: "1234" }));
+const app = new Hono({ strict: false })
+	.use("/static/*", serveStatic({ root: "./src" }))	//убрать потом
+	.basePath("/api")
+	.route("/users", users)
+	.route("/publications", publications);
 
 serve(
 	{

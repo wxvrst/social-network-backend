@@ -2,10 +2,10 @@ import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import {
 	createUserSchema,
-	listUsersQuerySchema,
 	updateUserSchema,
 	userIdParamSchema,
 	userUsernameParamSchema,
+	listUsersQuerySchema,
 } from "./users.schemas.js";
 
 import {
@@ -51,7 +51,7 @@ users.post("/", zValidator("json", createUserSchema), (c) => {
 });
 
 users.patch(
-	"/",
+	"/:id",
 	zValidator("param", userIdParamSchema),
 	zValidator("json", updateUserSchema),
 	(c) => {
@@ -71,7 +71,7 @@ users.patch(
 	},
 );
 
-users.delete("/", zValidator("param", userIdParamSchema), (c) => {
+users.delete("/:id", zValidator("param", userIdParamSchema), (c) => {
 	const { id } = c.req.valid("param");
 	const ok = deleteUser(id);
 	if (!ok) return c.json({ error: "User not found" }, 404);

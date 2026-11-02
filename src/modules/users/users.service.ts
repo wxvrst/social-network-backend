@@ -2,10 +2,11 @@ import type { CreateUserInput, UpdateUserInput, User } from "./users.schemas.js"
 //TODO: с добавлением бд переписать
 const users: User[] = [
 	{
-		id: 1,
+		id: 10, //TODO: сменить
 		name: "Gregor Zamza",
 		description: "Frontend developer, Google INC.",
 		username: "wxvrst",
+		avatar: "http://localhost:3000/static/frog.jpg",
 		additional: [
 			{
 				label: "Phone number:",
