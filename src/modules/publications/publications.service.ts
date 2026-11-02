@@ -11,7 +11,7 @@ const publications: Publication[] = [
 		description: "description1",
 		// image: "https://placehold.co/800x600",
 		image: "http://localhost:3000/static/frog.jpg",
-		date_added: new Date().toDateString(),
+		date_added: new Date().toISOString(),
 	},
 	{
 		id: 11,
@@ -26,8 +26,8 @@ let nextId: number = 1;
 
 const getAllPublications = (): Publication[] => publications;
 
-const getPublicationsByAuthorId = (id: number): Publication | null =>
-	publications.find((p) => p.author_id === id) ?? null;
+const getPublicationsByAuthorId = (id: number): Publication[] =>
+	publications.filter((p) => p.author_id === id);
 
 const getPublicationById = (id: number): Publication | null =>
 	publications.find((p) => p.id === id) ?? null;
@@ -35,7 +35,7 @@ const getPublicationById = (id: number): Publication | null =>
 const createPublication = (data: CreatePublicationInput): Publication => {
 	const publication: Publication = {
 		id: nextId++,
-		date_added: new Date().toTimeString(),
+		date_added: new Date().toISOString(),
 		...data,
 	};
 	publications.push(publication);

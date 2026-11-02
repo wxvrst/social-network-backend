@@ -23,7 +23,7 @@ export const publicationIdParamSchema = z.object({
 	id: z.coerce.number().int().positive(),
 });
 
-export const publicationAuhtorIdParamSchema = z.object({
+export const publicationAuthorIdParamSchema = z.object({
 	author_id: z.number().int().positive(),
 });
 
