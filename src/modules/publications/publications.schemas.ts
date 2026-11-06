@@ -3,13 +3,7 @@ import { z } from "zod";
 export const createPublicationSchema = z.object({
 	author_id: z.coerce.number().positive(), //TODO: убрать после auth
 	description: z.string().trim().min(1, "Empty description").max(200),
-	image: z
-		.string()
-		.trim()
-		.min(1, "Empty string")
-		.max(500)
-		.optional()
-		.default("http://localhost:3000/static/forg.jpg"), // временно
+	image: z.string().trim().min(1, "Empty string").max(500).optional(),
 });
 
 export const updatePublicationSchema = createPublicationSchema.omit({ author_id: true }).partial();

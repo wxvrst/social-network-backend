@@ -36,6 +36,7 @@ const createPublication = (data: CreatePublicationInput): Publication => {
 	const publication: Publication = {
 		id: nextId++,
 		date_added: new Date().toISOString(),
+		image: "http://localhost:3000/static/forg.jpg", //временно для наглядности
 		...data,
 	};
 	publications.push(publication);
